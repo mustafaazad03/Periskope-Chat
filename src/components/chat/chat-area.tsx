@@ -11,7 +11,7 @@ interface ChatAreaProps {
 export default function ChatArea({ chat, messages = [] }: ChatAreaProps) {
   if (!chat) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-gray-50">
+      <div className="flex-1 flex items-center justify-center bgImage">
         <p className="text-gray-500">Select a chat to start messaging</p>
       </div>
     )

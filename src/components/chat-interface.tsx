@@ -19,7 +19,7 @@ export default function ChatInterface() {
         <Header />
       <div className="flex h-full">
         <Sidebar chats={chats} selectedChat={selectedChat} onSelectChat={setSelectedChat} />
-        <div className="h-[93%] w-full flex">
+        <div className="h-auto w-full flex mb-16">
           <ChatArea chat={selectedChat} messages={selectedChat ? mockMessages[selectedChat.id] : []} />
         </div>
       </div>

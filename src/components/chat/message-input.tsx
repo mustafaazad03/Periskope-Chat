@@ -3,7 +3,17 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Paperclip, Smile, Mic, Clock, Image, Send } from "lucide-react"
+import { FaCircleInfo } from "react-icons/fa6";
+import { IoSend } from "react-icons/io5";
+import { FaCircleChevronDown } from "react-icons/fa6";
+import { FaRegClock } from "react-icons/fa6";
+import { PiClockClockwise } from "react-icons/pi";
+import { BsStars } from "react-icons/bs";
+import { IoDocumentText } from "react-icons/io5";
+import Image from 'next/image';
+import { FiPaperclip } from "react-icons/fi";
+import { CiFaceSmile } from "react-icons/ci";
+import { FaMicrophone } from "react-icons/fa6";
 
 export default function MessageInput() {
   const [message, setMessage] = useState("")
@@ -17,108 +27,72 @@ export default function MessageInput() {
   }
 
   return (
-    <div className="border-t border-gray-200 bg-white p-3">
-      <div className="flex items-center gap-2 mb-2">
-        <button className="text-gray-500 hover:text-green-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-5 w-5"
-          >
-            <path d="M3 3h18v18H3z"></path>
-          </svg>
+    <div className="relative">
+      <div className="flex items-center gap-2 bg-none absolute -top-9">
+        <FaCircleChevronDown className="w-3 h-3 text-gray-400 ml-2" />
+        <div className="border-gray-200 bg-white text-green-500 rounded-t-lg flex items-center gap-2 p-2">
+          <span className="text-sm">WhatsApp</span>
+          <FaCircleInfo className="w-3 h-3 text-gray-400" />
+        </div>
+        <button className="text-yellow-700 hover:text-yellow-900 bg-white rounded-t-lg flex items-center gap-2 p-2">
+          <span className="text-sm">Private Note</span>
+          <FaCircleInfo className="w-3 h-3 text-gray-400" />
         </button>
-        <span className="text-sm text-gray-500">WhatsApp</span>
-        <span className="text-sm text-gray-400 mx-1">|</span>
-        <button className="text-yellow-500 hover:text-yellow-600">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 15l-5-5 1.4-1.4L11 14.2l7.6-7.6L20 8l-9 9z"></path>
-          </svg>
-        </button>
-        <span className="text-sm text-gray-500">Private Note</span>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex items-end gap-2">
-        <div className="flex-1 border border-gray-300 rounded-lg bg-white p-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 bg-white px-2">
+        <div className="flex-1 w-full justify-between items-start p-2 flex">
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Message..."
-            className="w-full resize-none outline-none text-sm min-h-[24px] max-h-[120px]"
+            className="w-full resize-none outline-none text-sm min-h-[40px] max-h-[120px]"
             rows={1}
           />
-
-          <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
-            <div className="flex items-center gap-3">
-              <button type="button" className="text-gray-500 hover:text-gray-700">
-                <Paperclip className="h-5 w-5" />
-              </button>
-              <button type="button" className="text-gray-500 hover:text-gray-700">
-                <Smile className="h-5 w-5" />
-              </button>
-              <button type="button" className="text-gray-500 hover:text-gray-700">
-                <Mic className="h-5 w-5" />
-              </button>
-              <button type="button" className="text-gray-500 hover:text-gray-700">
-                <Clock className="h-5 w-5" />
-              </button>
-              <button type="button" className="text-gray-500 hover:text-gray-700">
-                <Image className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="bg-green-600 text-white p-3 rounded-full hover:bg-green-700 disabled:opacity-50"
-          disabled={!message.trim()}
-        >
-          <Send className="h-5 w-5" />
-        </button>
-      </form>
-
-      <div className="flex items-center justify-between mt-2">
-        <div className="flex items-center gap-1">
-          <div className="w-5 h-5 rounded-full bg-green-600 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-3 w-3"
-            >
-              <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
-              <path d="M12 8v4l2 2"></path>
-            </svg>
-          </div>
-          <span className="text-sm text-gray-500">Periskope</span>
-        </div>
-
-        <button className="text-gray-400 hover:text-gray-600">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-5 w-5"
+          <button
+            type="submit"
+            className="bg-white text-green-600 p-2 rounded-full hover:text-green-700 disabled:opacity-50"
+            disabled={!message.trim()}
           >
-            <path d="M12 3v18"></path>
-            <path d="M5 10l7-7 7 7"></path>
-          </svg>
-        </button>
-      </div>
+            <IoSend className="h-5 w-5" />
+          </button>
+        </div>
+        <div className="flex items-center justify-between mt-2 py-2 px-2">
+          <div className="flex items-center gap-4">
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <FiPaperclip className="h-5 w-5" />
+            </button>
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <CiFaceSmile className="h-6 w-6" />
+            </button>
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <FaRegClock className="h-5 w-5" />
+            </button>
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <PiClockClockwise className="h-6 w-6" />
+            </button>
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <BsStars className="h-6 w-6" />
+            </button>
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <IoDocumentText className="h-5 w-5" />
+            </button>
+            <button type="button" className="text-gray-500 hover:text-gray-700">
+              <FaMicrophone className="h-5 w-5" />
+            </button>
+          </div>
+          <div className="flex items-center justify-between bg-white border border-gray-50 rounded-lg w-auto p-2 px-3">
+            <div className="flex items-center gap-1">
+              <Image src="/logo.jpeg" width={16} height={16} quality={100} alt="Logo" />
+              <span className="text-sm text-gray-500">Periskope</span>
+            </div>
+
+            <button className="text-gray-400 hover:text-gray-600 ml-6">
+              <Image src="/left-right-arrow.png" alt="left-right-arrow" width={12} height={12} quality={100} className='rotate-90' />
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   )
 }

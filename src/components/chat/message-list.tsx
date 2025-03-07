@@ -32,7 +32,7 @@ export default function MessageList({ chat, messages }: MessageListProps) {
   })
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 bg-gray-50">
+    <div className="flex-1 overflow-y-auto p-4 bgImage">
       {Object.keys(groupedMessages).map((date) => (
         <div key={date} className="mb-6">
           <div className="flex justify-center mb-4">

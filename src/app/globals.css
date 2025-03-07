@@ -169,3 +169,10 @@ body {
     border-radius: 4px;
   }
 }
+
+.bgImage {
+  background: url("/public/bgwallpaper.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
