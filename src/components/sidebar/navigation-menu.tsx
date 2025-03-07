@@ -10,6 +10,8 @@ import { RiContactsBookFill } from "react-icons/ri";
 import { RiFolderImageFill } from "react-icons/ri";
 import { MdOutlineChecklist } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
+import { TbStarsFilled } from "react-icons/tb";
+import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
 import Image from "next/image"
 
 export default function NavigationMenu() {
@@ -19,24 +21,35 @@ export default function NavigationMenu() {
         <Image src="/logo.jpeg" alt="Logo" width={32} height={32} />
       </div>
 
-      <nav className="flex flex-col items-center gap-5 flex-1">
-        <NavItem icon={<AiFillHome className="h-5 w-5" />} active={false} />
+      <nav className="flex flex-col items-center gap-3 flex-1">
+        <div>
+          <NavItem icon={<AiFillHome className="h-5 w-5" />} active={false} />
+          <hr className="w-full border-t border-gray-200" />
+        </div>
         <NavItem icon={<AiFillMessage className="h-5 w-5" />} active={true} />
         <NavItem icon={<IoTicketSharp className="h-5 w-5" />} active={false} />
         <NavItem icon={<BsGraphUp className="h-5 w-5" />} active={false} />
-        <NavItem icon={<TfiMenuAlt className="h-5 w-5" />} active={false} />
+        <div>
+          <hr className="w-full border-t border-gray-200" />
+          <NavItem icon={<TfiMenuAlt className="h-5 w-5" />} active={false} />
+        </div>
         <NavItem icon={<HiSpeakerphone className="h-5 w-5" />} active={false} />
         <NavItem icon={<TiFlowMerge className="h-5 w-5" />} active={false} />
-        <NavItem icon={<RiContactsBookFill className="h-5 w-5" />} active={false} />
+        <div>
+          <hr className="w-full border-t border-gray-200" />
+          <NavItem icon={<RiContactsBookFill className="h-5 w-5" />} active={false} />
+        </div>
         <NavItem icon={<RiFolderImageFill className="h-5 w-5" />} active={false} />
-        <NavItem icon={<MdOutlineChecklist className="h-5 w-5" />} active={false} />
+        <div className="-mt-2">
+          <hr className="w-full border-t border-gray-200" />
+          <NavItem icon={<MdOutlineChecklist className="h-5 w-5" />} active={false} />
+        </div>
         <NavItem icon={<IoSettingsSharp className="h-5 w-5" />} active={false} />
-        <div className="mt-auto flex flex-col items-center gap-5">
-          <NavItem icon={<Settings className="h-5 w-5" />} active={false} />
-          <NavItem icon={<HelpCircle className="h-5 w-5" />} active={false} />
+        <div className="mt-auto flex flex-col items-center gap-3">
+        <NavItem icon={<TbStarsFilled className="h-5 w-5" />} active={false} />
+        <NavItem icon={<TbLayoutSidebarLeftExpandFilled className="h-5 w-5" />} active={false} />
         </div>
       </nav>
-
     </div>
   )
 }

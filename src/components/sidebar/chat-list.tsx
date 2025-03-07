@@ -9,7 +9,7 @@ interface ChatListProps {
 
 export default function ChatList({ chats, selectedChat, onSelectChat }: ChatListProps) {
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto bg-white">
       {chats.map((chat) => (
         <ChatItem
           key={chat.id}
@@ -51,7 +51,6 @@ function ChatItem({ chat, isSelected, onClick }: ChatItemProps) {
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-start">
           <h3 className="font-medium text-gray-900 truncate">{chat.name}</h3>
-          <span className="text-xs text-gray-500 whitespace-nowrap ml-1">{chat.lastMessageTime}</span>
         </div>
 
         <div className="flex items-center mt-1">
@@ -69,6 +68,16 @@ function ChatItem({ chat, isSelected, onClick }: ChatItemProps) {
             </div>
           )}
 
+          {chat.unreadCount > 0 && (
+            <span className="ml-auto flex items-center justify-center w-5 h-5 bg-green-600 text-white text-xs rounded-full">
+              {chat.unreadCount}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-between gap-1">
+        <div className="gap-1">
           {chat.tags &&
             chat.tags.map((tag, index) => (
               <span
@@ -87,14 +96,37 @@ function ChatItem({ chat, isSelected, onClick }: ChatItemProps) {
               >
                 {tag.label}
               </span>
-            ))}
-
-          {chat.unreadCount > 0 && (
-            <span className="ml-auto flex items-center justify-center w-5 h-5 bg-green-600 text-white text-xs rounded-full">
-              {chat.unreadCount}
-            </span>
-          )}
-        </div>
+          ))}
+          </div>
+          <div className="flex flex-col items-end gap-1 mt-1-">
+            {/* Participants display */}
+            {chat.participants && chat.participants.length > 0 && (
+              <div className="flex items-center">
+                <div className="relative flex items-center">
+                  <div className="w-5 h-5 p-1 rounded-full overflow-hidden border border-white bg-gray-200">
+                    {chat.participants[0].avatar ? (
+                      <img 
+                        src={chat.participants[0].avatar} 
+                        alt={chat.participants[0].name} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-xs text-gray-600">
+                        {chat.participants[0].name.charAt(0)}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {chat.participants.length > 1 && (
+                    <div className="w-5 h-5 p-1 rounded-full bg-green-500 text-white text-xs flex items-center justify-center ml-1">
+                      +{chat.participants.length - 1}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        <span className="text-xs text-gray-500 whitespace-nowrap ml-1 flex text-right justify-end mt-1">{chat.lastMessageTime}</span>
       </div>
     </div>
   )

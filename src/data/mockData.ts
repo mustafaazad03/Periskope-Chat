@@ -1,4 +1,15 @@
-import type { ChatData, Message } from "@/types/index"
+import type { ChatData, Message, User } from "@/types/index"
+
+// Create a set of mock users that can be used across chats
+const mockUsers: User[] = [
+  { id: "u1", name: "Roshnag Airtel", phone: "+91 63646 47925" },
+  { id: "u2", name: "Roshnag Jio", phone: "+91 73646 48925" },
+  { id: "u3", name: "Bharat Kumar Ramesh", phone: "+91 83646 49925" },
+  { id: "u4", name: "Periskope", avatar: "/periskope-logo.svg", phone: "+91 99718 44008" },
+  { id: "u5", name: "Support2", phone: "+91 99718 44009" },
+  { id: "u6", name: "Rohosen", phone: "+91 92896 66999" },
+  { id: "u7", name: "Swapnika", phone: "+91 99999 99999" }
+]
 
 export const mockChats: ChatData[] = [
   {
@@ -10,6 +21,7 @@ export const mockChats: ChatData[] = [
     unreadCount: 0,
     phone: "+91 99718 44008 +1",
     tags: [{ type: "demo", label: "Demo" }],
+    participants: [mockUsers[4], mockUsers[3]] // Support2, Periskope
   },
   {
     id: "2",
@@ -24,6 +36,7 @@ export const mockChats: ChatData[] = [
       { type: "demo", label: "Demo" },
       { type: "internal", label: "Internal" },
     ],
+    participants: [mockUsers[3], mockUsers[4], mockUsers[2]] // Periskope, Support2, Bharat
   },
   {
     id: "3",
@@ -37,6 +50,7 @@ export const mockChats: ChatData[] = [
       { type: "demo", label: "Demo" },
       { type: "signup", label: "Signup" },
     ],
+    participants: [mockUsers[6], mockUsers[3]] // Swapnika, Periskope
   },
   {
     id: "4",
@@ -51,6 +65,7 @@ export const mockChats: ChatData[] = [
       { type: "content", label: "Content" },
       { type: "demo", label: "Demo" },
     ],
+    participants: [mockUsers[5], mockUsers[3]] // Rohosen, Periskope
   },
   {
     id: "5",
@@ -61,7 +76,12 @@ export const mockChats: ChatData[] = [
     unreadCount: 0,
     phone: "+91 99718 44008",
     tags: [{ type: "demo", label: "Demo" }],
-    participants: ["Roshnag Airtel", "Roshnag Jio", "Bharat Kumar Ramesh", "Periskope"],
+    participants: [
+      mockUsers[0], // Roshnag Airtel
+      mockUsers[1], // Roshnag Jio
+      mockUsers[2], // Bharat Kumar Ramesh
+      mockUsers[3]  // Periskope
+    ],
   },
   {
     id: "6",
@@ -72,6 +92,7 @@ export const mockChats: ChatData[] = [
     unreadCount: 0,
     phone: "+91 92896 65999",
     tags: [{ type: "demo", label: "Demo" }],
+    participants: [mockUsers[3], mockUsers[5]] // Periskope, Rohosen
   },
   {
     id: "7",
@@ -86,6 +107,7 @@ export const mockChats: ChatData[] = [
       { type: "demo", label: "Demo" },
       { type: "dont", label: "Dont Send" },
     ],
+    participants: [mockUsers[3], mockUsers[2]] // Periskope, Bharat
   },
   {
     id: "8",
@@ -96,6 +118,7 @@ export const mockChats: ChatData[] = [
     unreadCount: 0,
     phone: "+91 99718 44008 +1",
     tags: [{ type: "demo", label: "Demo" }],
+    participants: [mockUsers[3], mockUsers[4]] // Periskope, Support2
   },
   {
     id: "9",
@@ -107,6 +130,7 @@ export const mockChats: ChatData[] = [
     unreadCount: 0,
     phone: "+91 92896 65999",
     tags: [{ type: "demo", label: "Demo" }],
+    participants: [mockUsers[3], mockUsers[6]] // Periskope, Swapnika
   },
   {
     id: "10",
@@ -118,6 +142,7 @@ export const mockChats: ChatData[] = [
     unreadCount: 0,
     phone: "+91 92896 65999",
     tags: [{ type: "demo", label: "Demo" }],
+    participants: [mockUsers[3], mockUsers[5]] // Periskope, Rohosen
   },
 ]
 
@@ -178,6 +203,7 @@ export const mockMessages: { [key: string]: Message[] } = {
       date: "23-01-2025",
       status: "read",
       phone: "+91 99718 44008",
+      forwardedFrom: "bharat@nashflows.dev"
     },
     {
       id: "7",
@@ -197,7 +223,7 @@ export const mockMessages: { [key: string]: Message[] } = {
       date: "23-01-2025",
       status: "read",
       phone: "+91 99718 44008",
+      forwardedFrom: "bharat@nashflows.dev"
     },
   ],
 }
-

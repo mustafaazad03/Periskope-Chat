@@ -1,19 +1,17 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 245, 245, 245;
 }
 
 body {
-  @apply text-[rgb(var(--foreground-rgb))] bg-[rgb(var(--background-rgb))];
+  @apply text-[rgb(var(--foreground-rgb))] bg-[rgb(var(--background-rgb))] font-sans antialiased;
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

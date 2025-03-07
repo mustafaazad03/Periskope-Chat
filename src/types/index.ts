@@ -36,6 +36,13 @@
 //   messages: Message[]
 // }
 
+export interface User {
+  id: string
+  name: string
+  avatar?: string
+  phone?: string
+}
+
 export interface ChatData {
   id: string
   name: string
@@ -46,7 +53,7 @@ export interface ChatData {
   lastMessageType?: "text" | "image" | "phone"
   unreadCount: number
   phone?: string
-  participants?: string[]
+  participants: User[]
   tags?: {
     type: string
     label: string
@@ -62,4 +69,12 @@ export interface Message {
   date: string
   status?: "sent" | "delivered" | "read"
   phone?: string
+  forwardedFrom?: string
+  attachments?: {
+    type: "image" | "document" | "audio" | "video"
+    url: string
+    name?: string
+    size?: string
+    thumbnail?: string
+  }[]
 }

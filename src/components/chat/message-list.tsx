@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useRef } from "react"
 import type { ChatData, Message } from "@/types/index"
 import { Check, CheckCheck } from "lucide-react"
+import { RiSendPlaneFill } from "react-icons/ri";
 
 interface MessageListProps {
   chat: ChatData
@@ -11,10 +12,6 @@ interface MessageListProps {
 
 export default function MessageList({ chat, messages }: MessageListProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }, [])
 
   // Handle empty messages array
   if (!messages || messages.length === 0) {
@@ -39,15 +36,16 @@ export default function MessageList({ chat, messages }: MessageListProps) {
       {Object.keys(groupedMessages).map((date) => (
         <div key={date} className="mb-6">
           <div className="flex justify-center mb-4">
-            <span className="text-xs text-gray-500 bg-gray-200 px-2 py-1 rounded-md">{date}</span>
+            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">{date}</span>
           </div>
 
           {groupedMessages[date].map((message, index) => (
             <MessageItem
-              key={index}
+              key={message.id}
               message={message}
               isOwnMessage={message.sender === "me"}
               showSender={index === 0 || groupedMessages[date][index - 1].sender !== message.sender}
+              previousMessage={index > 0 ? groupedMessages[date][index - 1] : null}
             />
           ))}
         </div>
@@ -61,37 +59,68 @@ interface MessageItemProps {
   message: Message
   isOwnMessage: boolean
   showSender: boolean
+  previousMessage: Message | null
 }
 
-function MessageItem({ message, isOwnMessage, showSender }: MessageItemProps) {
+function MessageItem({ message, isOwnMessage, showSender, previousMessage }: MessageItemProps) {
+  // Determine if this is part of a message group (same sender with short time difference)
+  const isPartOfGroup = previousMessage && 
+                        previousMessage.sender === message.sender && 
+                        !showSender;
+
   return (
     <div className={`flex mb-2 ${isOwnMessage ? "justify-end" : "justify-start"}`}>
-      <div className={`max-w-[70%] ${isOwnMessage ? "order-2" : "order-1"}`}>
-        {showSender && !isOwnMessage && (
-          <div className="text-sm font-medium text-gray-600 mb-1">
+      {!isOwnMessage && showSender ? (
+        <div className="w-8 h-8 rounded-full bg-gray-200 mr-2 flex-shrink-0 flex items-center justify-center text-xs">
+          {message.senderName.charAt(0)}
+        </div>
+      ) : (
+        <div className="w-8 h-8 mr-2 flex-shrink-0 flex items-center justify-center text-xs">
+        </div>
+      )}
+      
+      <div className={`max-w-[70%] rounded-md p-1 px-2 shadow-sm ${isOwnMessage ? "bg-green-100 text-gray-800" : "bg-white text-gray-800 border border-gray-100"}`}>
+        {showSender && !isOwnMessage ? (
+          <div className="text-sm font-semibold text-green-500 mb-1 ml-1 flex justify-between items-center">
             {message.senderName}
-            {message.phone && <span className="text-xs text-gray-500 ml-2">{message.phone}</span>}
+            <span className="text-xs font-normal text-gray-500 ml-6">{message.phone}</span>
+          </div>
+        ) : (
+          <div className="text-sm font-semibold text-green-500 mb-1 ml-1 flex justify-between items-center">
+            {message.senderName}
+            <span className="text-xs font-normal text-gray-500 ml-6">{message.phone}</span>
           </div>
         )}
 
         <div
-          className={`rounded-lg p-3 ${
-            isOwnMessage ? "bg-green-100 text-gray-800" : "bg-white text-gray-800 border border-gray-200"
-          }`}
+          className={`ml-1 mt-1`}
         >
-          <p className="text-sm">{message.text}</p>
-          <div className="flex justify-end items-center mt-1 gap-1">
-            <span className="text-xs text-gray-500">{message.time}</span>
-            {isOwnMessage &&
-              (message.status === "read" ? (
-                <CheckCheck className="h-3 w-3 text-green-600" />
-              ) : (
-                <Check className="h-3 w-3 text-gray-400" />
-              ))}
+          <p className="text-sm pr-4 font-medium">{message.text}</p>
+          <div className="flex justify-between items-center mt-1">
+          {isOwnMessage ? (
+              <div className="flex items-center justify-end mt-1 gap-1">
+                {message.forwardedFrom && (
+                  <div className="text-xs text-gray-500 flex items-center mr-1">
+                    <RiSendPlaneFill className="w-2 h-2 mr-0.5" />
+                    {message.forwardedFrom}
+                  </div>
+                )}
+              </div>
+            ): (
+              <div className=""></div>
+            )}
+            <div className="flex items-center gap-1 justify-end ml-6">
+              <span className="text-xs text-gray-500">{message.time}</span>
+              {isOwnMessage &&
+                (message.status === "read" ? (
+                  <CheckCheck className="h-3 w-3 text-blue-600" />
+                ) : (
+                  <Check className="h-3 w-3 text-gray-400" />
+                ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
