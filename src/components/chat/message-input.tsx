@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { FaCircleInfo } from "react-icons/fa6";
 import { IoSend } from "react-icons/io5";
@@ -15,13 +14,17 @@ import { FiPaperclip } from "react-icons/fi";
 import { CiFaceSmile } from "react-icons/ci";
 import { FaMicrophone } from "react-icons/fa6";
 
-export default function MessageInput() {
+interface MessageInputProps {
+  onSendMessage: (text: string) => void;
+}
+
+export default function MessageInput({ onSendMessage }: MessageInputProps) {
   const [message, setMessage] = useState("")
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (message.trim()) {
-      // Send message logic would go here
+      onSendMessage(message.trim())
       setMessage("")
     }
   }
@@ -30,17 +33,17 @@ export default function MessageInput() {
     <div className="relative">
       <div className="flex items-center gap-2 bg-none absolute -top-9">
         <FaCircleChevronDown className="w-3 h-3 text-gray-400 ml-2" />
-        <div className="border-gray-200 bg-white text-green-500 rounded-t-lg flex items-center gap-2 p-2">
-          <span className="text-sm">WhatsApp</span>
+        <div className="border-gray-200 bg-white text-green-500 rounded-t-lg flex items-center gap-2 p-2 px-3">
+          <span className="text-sm font-medium">WhatsApp</span>
           <FaCircleInfo className="w-3 h-3 text-gray-400" />
         </div>
-        <button className="text-yellow-700 hover:text-yellow-900 bg-white rounded-t-lg flex items-center gap-2 p-2">
-          <span className="text-sm">Private Note</span>
+        <button className="text-yellow-700 hover:text-yellow-900 bg-white rounded-t-lg flex items-center gap-2 p-2 px-3">
+          <span className="text-sm font-medium">Private Note</span>
           <FaCircleInfo className="w-3 h-3 text-gray-400" />
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 bg-white px-2">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 bg-white px-2" onKeyDown={(e) => e.key === 'Enter' && handleSubmit(e)}>
         <div className="flex-1 w-full justify-between items-start p-2 flex">
           <textarea
             value={message}

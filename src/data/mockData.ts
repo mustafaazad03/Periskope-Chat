@@ -1,14 +1,14 @@
-import type { ChatData, Message, User } from "@/types/index"
+import type { ChatData, Message, MessagePopulated, User } from "@/types/index"
 
 // Create a set of mock users that can be used across chats
-const mockUsers: User[] = [
-  { id: "u1", name: "Roshnag Airtel", phone: "+91 63646 47925" },
-  { id: "u2", name: "Roshnag Jio", phone: "+91 73646 48925" },
-  { id: "u3", name: "Bharat Kumar Ramesh", phone: "+91 83646 49925" },
-  { id: "u4", name: "Periskope", avatar: "/periskope-logo.svg", phone: "+91 99718 44008" },
-  { id: "u5", name: "Support2", phone: "+91 99718 44009" },
-  { id: "u6", name: "Rohosen", phone: "+91 92896 66999" },
-  { id: "u7", name: "Swapnika", phone: "+91 99999 99999" }
+const mockUsers: any[] = [
+  { id: "u1", full_name: "Roshnag Airtel", phone: "+91 63646 47925" },
+  { id: "u2", full_name: "Roshnag Jio", phone: "+91 73646 48925" },
+  { id: "u3", full_name: "Bharat Kumar Ramesh", phone: "+91 83646 49925" },
+  { id: "u4", full_name: "Periskope", avatar: "/periskope-logo.svg", phone: "+91 99718 44008" },
+  { id: "u5", full_name: "Support2", phone: "+91 99718 44009" },
+  { id: "u6", full_name: "Rohosen", phone: "+91 92896 66999" },
+  { id: "u7", full_name: "Swapnika", phone: "+91 99999 99999" }
 ]
 
 export const mockChats: ChatData[] = [
@@ -26,7 +26,7 @@ export const mockChats: ChatData[] = [
   {
     id: "2",
     name: "Periskope Team Chat",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar_url: "/placeholder.svg?height=40&width=40",
     lastMessage: "Periskope: Test message",
     lastMessageTime: "28-Feb-25",
     lastMessageStatus: "read",
@@ -55,7 +55,7 @@ export const mockChats: ChatData[] = [
   {
     id: "4",
     name: "Test Demo17",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar_url: "/placeholder.svg?height=40&width=40",
     lastMessage: "Rohosen: 123",
     lastMessageTime: "25-Feb-25",
     lastMessageStatus: "read",
@@ -97,7 +97,7 @@ export const mockChats: ChatData[] = [
   {
     id: "7",
     name: "Yasin 3",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar_url: "/placeholder.svg?height=40&width=40",
     lastMessage: "First Bulk Message",
     lastMessageTime: "25-Nov-24",
     lastMessageStatus: "sent",
@@ -123,7 +123,7 @@ export const mockChats: ChatData[] = [
   {
     id: "9",
     name: "Skope Demo",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar_url: "/placeholder.svg?height=40&width=40",
     lastMessage: "test 123",
     lastMessageTime: "20-Dec-24",
     lastMessageStatus: "read",
@@ -135,7 +135,7 @@ export const mockChats: ChatData[] = [
   {
     id: "10",
     name: "Test Demo15",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar_url: "/placeholder.svg?height=40&width=40",
     lastMessage: "test 123",
     lastMessageTime: "20-Dec-24",
     lastMessageStatus: "read",
@@ -146,7 +146,7 @@ export const mockChats: ChatData[] = [
   },
 ]
 
-export const mockMessages: { [key: string]: Message[] } = {
+export const mockMessages: { [key: string]: any[] } = {
   "5": [
     {
       id: "1",

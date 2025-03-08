@@ -10,7 +10,7 @@ import { TfiMenuAlt } from 'react-icons/tfi';
 
 const Header = () => {
   return (
-    <div className="p-2 flex items-center gap-2 border-b border-gray-200 bg-white">
+    <div className="p-2 flex items-center gap-2 border-b border-gray-200 bg-white h-max">
       <div className="flex items-center gap-2 flex-1">
         <div className="flex items-center gap-1 text-gray-600 font-medium text-center">
           <span className="flex h-5 w-5 items-center justify-center rounded-full text-gray-600 text-xs">

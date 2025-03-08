@@ -7,6 +7,7 @@ import Link from 'next/link'
 
 export default function SignUp() {
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [fullName, setFullName] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -39,15 +40,20 @@ export default function SignUp() {
       return
     }
 
+    // Phone number
+    if (!/^\d{10}$/.test(phone)) {
+      setError('Please enter a valid 10-digit phone number')
+      setLoading(false)
+      return
+    }
+
     try {
-      const { data, error } = await signUp(email, password, fullName)
+      const { data, error } = await signUp(email, password, fullName, phone)
       
-      if (error) {
-        setError(error.message)
+      if (error && typeof error === 'object' && 'message' in error) {
+        setError(error.message as string)
       } else {
         setSuccess(true)
-        // In case of email confirmation flow 
-        // we show a success message instead of redirecting immediately
         setTimeout(() => {
           router.push('/login')
         }, 3000)
@@ -108,6 +114,18 @@ export default function SignUp() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-2 border rounded text-black"
+              required
+              disabled={loading}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-2">Phone</label>
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full p-2 border rounded text-black"
               required
               disabled={loading}
