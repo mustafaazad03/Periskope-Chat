@@ -1,5 +1,7 @@
 # Periskope Chat Application
 
+[Screencast from 08-03-25 04:49:47 PM IST.webm](https://github.com/user-attachments/assets/9f72a3bb-261e-4c3d-8ea8-997f01bd771d)
+
 ## Overview
 
 Periskope Chat is a modern, real-time messaging application built with Next.js and Supabase. This project demonstrates a fully functional chat system with features similar to popular messaging platforms like WhatsApp, while maintaining a clean and intuitive user interface.
